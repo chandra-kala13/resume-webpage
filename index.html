@@ -20,7 +20,6 @@
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #eef2ff, #f8fafc);
       color: var(--dark);
-      line-height: 1.6;
     }
 
     .container {
@@ -30,17 +29,10 @@
       border-radius: 16px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.08);
       overflow: hidden;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     header {
-      display: grid;
-      grid-template-columns: 160px 1fr;
+      display: flex;
       gap: 30px;
       padding: 40px;
       background: linear-gradient(135deg, var(--primary), #6d83f2);
@@ -48,49 +40,88 @@
       align-items: center;
     }
 
+    .profile {
+      text-align: center;
+      width: 220px;
+    }
+
     .profile-pic {
-      width: 150px;
-      height: 150px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
       border: 5px solid white;
       object-fit: cover;
-      background: #ddd;
+      margin-bottom: 15px;
     }
 
-    header h1 {
-      font-size: 2.4rem;
+    .profile h1 {
+      font-size: 1.6rem;
       font-weight: 600;
     }
 
-    header p {
-      font-size: 1rem;
+    .profile p {
+      font-size: 0.95rem;
       opacity: 0.9;
     }
 
     .content {
       display: grid;
-      grid-template-columns: 1fr 2fr;
+      grid-template-columns: 250px 1fr;
+      min-height: 500px;
     }
 
     .left {
       background: var(--secondary);
-      padding: 30px;
+      padding: 25px;
+    }
+
+    .left h2 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: var(--primary);
     }
 
     .right {
       padding: 30px 40px;
     }
 
-    h2 {
-      font-size: 1.2rem;
+    .accordion {
+      border-bottom: 1px solid #e5e7eb;
       margin-bottom: 10px;
+    }
+
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      padding: 15px 0;
+      font-weight: 500;
+      font-size: 1.05rem;
       color: var(--primary);
     }
 
-    section { margin-bottom: 25px; }
+    .accordion-header span {
+      transition: transform 0.3s;
+    }
 
-    ul { list-style: none; }
+    .accordion.active .accordion-header span {
+      transform: rotate(90deg);
+    }
 
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      color: var(--dark);
+    }
+
+    .accordion.active .accordion-content {
+      max-height: 500px;
+      padding-bottom: 15px;
+    }
+
+    ul { list-style: none; padding-left: 15px; }
     ul li::before {
       content: "•";
       color: var(--primary);
@@ -102,12 +133,11 @@
 
     .tag {
       display: inline-block;
-      background: white;
+      background: var(--secondary);
       padding: 6px 12px;
       margin: 6px 6px 0 0;
       border-radius: 20px;
       font-size: 0.85rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
     footer {
@@ -124,37 +154,45 @@
     }
 
     @media (max-width: 900px) {
-      header { grid-template-columns: 1fr; text-align: center; }
+      header { flex-direction: column; text-align: center; }
       .content { grid-template-columns: 1fr; }
-      .profile-pic { margin: auto; }
+      .profile { width: 100%; }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <header>
-      <!-- Replace profile.jpg with your photo file name -->
-      <img src="profile.jpeg" alt="Profile Photo" class="profile-pic" />
-      <div>
-        <h1>Chandrakala R</h1>
-        <p>Student | Python Developer | AI & ML Trainee</p>
+  <header>
+    <div class="profile">
+      <img src="profile.jpeg" class="profile-pic" alt="Profile Photo">
+      <h1>Chandrakala R</h1>
+      <p>Student | Python Developer | AI & ML Trainee</p>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <div class="left">
+      <h2>Contact</h2>
+      <p>📞 8431356207</p>
+      <p>✉️ chandu990024@gmail.com</p>
+      <p>📍 Bangalore – 560048</p>
+    </div>
+
+    <div class="right">
+
+      <div class="accordion">
+        <div class="accordion-header">Summary <span>▶</span></div>
+        <div class="accordion-content">
+          <p>Highly motivated Computer Science student with strong problem‑solving skills and a passion for Python, Data Science, and AI/ML.</p>
+        </div>
       </div>
-    </header>
 
-    <div class="content">
-
-      <div class="left">
-        <section>
-          <h2>Contact</h2>
-          <p>📞 8431356207</p>
-          <p>✉️ chandu990024@gmail.com</p>
-          <p>📍 Bangalore – 560048</p>
-        </section>
-
-        <section>
-          <h2>Strengths</h2>
+      <div class="accordion">
+        <div class="accordion-header">Strengths <span>▶</span></div>
+        <div class="accordion-content">
           <ul>
             <li>Adaptable & Flexible</li>
             <li>Team Player</li>
@@ -162,65 +200,57 @@
             <li>Good Communication</li>
             <li>Problem Solving</li>
           </ul>
-        </section>
-
-        <section>
-          <h2>Education</h2>
-          <p><strong>BCA</strong><br>Hood Government College, Bengaluru<br><small>6th Semester</small></p>
-          <br>
-          <p><strong>PUC (12th)</strong><br>Hood Government College</p>
-          <br>
-          <p><strong>SSLC (10th)</strong><br>Sri Krishna High School</p>
-        </section>
+        </div>
       </div>
 
-      <div class="right">
-        <section>
-          <h2>Summary</h2>
-          <p>Highly motivated Computer Science student with strong problem-solving skills and a passion for Python, Data Science, and AI/ML. Seeking an entry-level role to apply technical knowledge in a professional environment.</p>
-        </section>
+      <div class="accordion">
+        <div class="accordion-header">Technical Skills <span>▶</span></div>
+        <div class="accordion-content">
+          <div class="tag">Python</div><div class="tag">Java</div><div class="tag">C</div>
+          <div class="tag">HTML</div><div class="tag">CSS</div><div class="tag">NumPy</div>
+          <div class="tag">Pandas</div><div class="tag">Matplotlib</div><div class="tag">AWS</div>
+        </div>
+      </div>
 
-        <section>
-          <h2>Technical Skills</h2>
-          <div class="tag">Python</div>
-          <div class="tag">Java</div>
-          <div class="tag">C</div>
-          <div class="tag">HTML</div>
-          <div class="tag">CSS</div>
-          <div class="tag">NumPy</div>
-          <div class="tag">Pandas</div>
-          <div class="tag">Matplotlib</div>
-          <div class="tag">Seaborn</div>
-          <div class="tag">AWS</div>
-          <div class="tag">JupyterLab</div>
-        </section>
-
-        <section>
-          <h2>Projects</h2>
+      <div class="accordion">
+        <div class="accordion-header">Projects <span>▶</span></div>
+        <div class="accordion-content">
           <ul>
-            <li><strong>Cancer Patients Analysis:</strong> Data analysis using Python, NumPy, Pandas, and visualization techniques.</li>
-            <li><strong>AWS Cloud Projects:</strong> EC2 instance creation, Textract usage, and sentiment analysis using Python.</li>
+            <li>Cancer Patients Analysis – Python & Data Science</li>
+            <li>AWS Cloud Projects – EC2, Textract, Sentiment Analysis</li>
           </ul>
-        </section>
+        </div>
+      </div>
 
-        <section>
-          <h2>Certifications</h2>
+      <div class="accordion">
+        <div class="accordion-header">Certifications <span>▶</span></div>
+        <div class="accordion-content">
           <ul>
             <li>Cloud Computing Certification</li>
             <li>Data Science – Alpus Institution</li>
             <li>Artificial Intelligence – Dream Institution</li>
-            <li>Soft Skills Training – Magic Bus Foundation</li>
+            <li>Soft Skills – Magic Bus Foundation</li>
           </ul>
-        </section>
+        </div>
       </div>
 
     </div>
-
-    <footer>
-      Company Name: <span>IMTDA Infotech Private Limited</span>
-    </footer>
-
   </div>
+
+  <footer>
+    Company Name: <span>IMTDA Infotech Private Limited</span>
+  </footer>
+</div>
+
+<script>
+  const accordions = document.querySelectorAll('.accordion');
+  accordions.forEach(acc => {
+    acc.querySelector('.accordion-header').addEventListener('click', () => {
+      accordions.forEach(a => a !== acc && a.classList.remove('active'));
+      acc.classList.toggle('active');
+    });
+  });
+</script>
 
 </body>
 </html>
